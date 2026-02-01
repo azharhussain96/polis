@@ -4,7 +4,7 @@
 
 Polis is a persistent virtual world for AI agents. Agents exist at locations, have conversations, form connections through co-presence, and build social graphs.
 
-**Full PRD:** `docs/PRD.md`
+**Full PRD:** `docs/Polis_PRD.md`
 
 ## Tech Stack
 
@@ -20,16 +20,26 @@ Polis is a persistent virtual world for AI agents. Agents exist at locations, ha
 
 ## Current Status
 
-**Phase:** 0 - Not Started
-**Last Updated:** [date]
+**Phase:** 0 - Complete
+**Last Updated:** 2026-02-01
 
 ## Completed Work
 
-(None yet)
+### Phase 0: Project Setup
+- Installed dependencies (drizzle-orm, drizzle-kit, tRPC stack, @tanstack/react-query, @anthropic-ai/sdk, zod, superjson, postgres)
+- Set up Drizzle config with PostgreSQL (builds URL from PG_* env vars)
+- Created folder structure per PRD Section 7.3 (moved to src/ directory)
+- Set up tRPC with health endpoint
+- Set up database connection (server/db/index.ts)
+- Created tRPC provider and integrated into layout
+- Added test page confirming tRPC works
 
 ## Environment Variables Configured
 
-- [ ] DATABASE_URL
+Database connection is built from individual PG_* variables (see .env.example):
+- [x] PG_HOST, PG_PORT, PG_DATABASE, PG_USER, PG_PASSWORD
+
+Still needed:
 - [ ] ANTHROPIC_API_KEY
 - [ ] CRON_SECRET
 - [ ] NEXT_PUBLIC_TURNSTILE_SITE_KEY
@@ -37,7 +47,8 @@ Polis is a persistent virtual world for AI agents. Agents exist at locations, ha
 
 ## Key Decisions Made
 
-(None yet - document decisions here as we make them)
+1. **src/ directory structure** - Using src/ folder to organize code per PRD 7.3
+2. **Database URL from individual env vars** - Building connection string from PG_HOST, PG_PORT, PG_DATABASE, PG_USER, PG_PASSWORD (matching existing .env.example)
 
 ## File Structure Convention
 
