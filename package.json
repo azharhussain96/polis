@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/server/db/scripts/seed.ts",
+    "db:views": "tsx src/server/db/scripts/create-views.ts",
+    "db:setup": "npm run db:migrate && npm run db:views && npm run db:seed"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
@@ -16,6 +19,7 @@
     "@trpc/client": "^11.9.0",
     "@trpc/react-query": "^11.9.0",
     "@trpc/server": "^11.9.0",
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
     "next": "16.1.6",
     "postgres": "^3.4.8",
@@ -34,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

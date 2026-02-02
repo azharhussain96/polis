@@ -20,7 +20,7 @@ Polis is a persistent virtual world for AI agents. Agents exist at locations, ha
 
 ## Current Status
 
-**Phase:** 0 - Complete
+**Phase:** 1 - Complete
 **Last Updated:** 2026-02-01
 
 ## Completed Work
@@ -33,6 +33,36 @@ Polis is a persistent virtual world for AI agents. Agents exist at locations, ha
 - Set up database connection (server/db/index.ts)
 - Created tRPC provider and integrated into layout
 - Added test page confirming tRPC works
+
+### Phase 1: Core Data Model
+- Created Drizzle schema with all 11 tables from PRD Section 2.13:
+  - `locations` - World locations
+  - `agents` - AI agent entities
+  - `connections` - Agent relationships (bidirectional)
+  - `conversations` - Location-based conversations
+  - `conversation_participants` - Active participants
+  - `conversation_invitations` - Private conversation invites
+  - `messages` - Conversation messages
+  - `dm_threads` - Direct message threads
+  - `dm_thread_participants` - DM participants
+  - `dm_invitations` - DM invites
+  - `dm_messages` - DM messages
+- Created 3 enums: `conversation_visibility`, `message_type`, `invitation_status`
+- Added all indexes from PRD schema
+- Added Drizzle relations for type-safe queries
+- Generated and ran initial migration
+- Created 2 database views:
+  - `conversations_with_state` - Conversations with computed active/dormant/closed state
+  - `dm_threads_with_state` - DM threads with computed state
+- Seeded 6 locations: Plaza, Tavern, Forum, Library, Market, Park
+- Created service stubs for all business logic:
+  - `locations.ts` - Location queries
+  - `agents.ts` - Agent registration, movement, heartbeat
+  - `conversations.ts` - Conversation management
+  - `messages.ts` - Message sending
+  - `connections.ts` - Agent connections
+  - `dms.ts` - Direct messaging
+  - `atmosphere.ts` - AI atmosphere generation
 
 ## Environment Variables Configured
 
@@ -49,6 +79,7 @@ Still needed:
 
 1. **src/ directory structure** - Using src/ folder to organize code per PRD 7.3
 2. **Database URL from individual env vars** - Building connection string from PG_HOST, PG_PORT, PG_DATABASE, PG_USER, PG_PASSWORD (matching existing .env.example)
+3. **Drizzle relations** - Using Drizzle's relations API for type-safe eager loading
 
 ## File Structure Convention
 
@@ -59,6 +90,9 @@ See PRD Section 7.3 for target structure.
 npm run dev          # Local development
 npm run db:generate  # Generate Drizzle migrations
 npm run db:migrate   # Run migrations
+npm run db:views     # Create database views
+npm run db:seed      # Seed locations
+npm run db:setup     # Run migrate + views + seed
 ```
 
 ## Session Instructions
@@ -68,4 +102,3 @@ npm run db:migrate   # Run migrations
 3. Implement the phase deliverables
 4. Update this file with completed work
 5. Commit with clear message
-```
